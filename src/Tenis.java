@@ -8,9 +8,10 @@ class Tenis{
     static Tenis player = new Tenis();
     int tiros_jugador_a;
     int tiros_jugador_b;
-    String puntos_nombre[] = {"fefteen", "thirty"};
+    String puntos_nombre[] = {"fefteen", "thirty","fourteen}"};
     int tiros = 0;
     String cero ="LOVE";
+    String all="ALL";
     String ventaja ="ADVANTAGE";
     
     public Tenis(){}
@@ -69,13 +70,23 @@ class Tenis{
         }
     }
     
-    public void score(){
-        if(player.getJugadorA()==0 ){
+    public void score(){ 
+        if(player.getJugadorA()==0 && player.getJugadorB() == 0 ){
+         System.out.println("jugador A ( " + cero +" - " + all +" ) jugador B ");
+        }
+        else if(player.getJugadorA()==0 && player.getJugadorB()>1){
          System.out.println("jugador A ( " + cero +" - " + player.getJugadorB() +" ) jugador B ");
         }
-        else{
+        else if(player.getJugadorB()==0 && player.getJugadorA()>1){
+         System.out.println("jugador A ( " + player.getJugadorA() +" - " + all +" ) jugador B ");
+        }
+          else if(player.getJugadorA()==40 && player.getJugadorB()==40 ){
+         System.out.println("jugador A ( " + puntos_nombre[1] +" - " + puntos_nombre[1] +" ) jugador B "); 
+        }
+        else if(player.getJugadorA()>=15 && player.getJugadorB()>=15 ){
          System.out.println("jugador A ( " + player.getJugadorA() +" - " + player.getJugadorB() +" ) jugador B "); 
         }
+      
     }
 
     public int getTirosJugador_a(){
@@ -87,24 +98,24 @@ class Tenis{
     }    
     
     public static void main(String []a){
+          player.setPuntos(jugador_a);
+            player.setPuntos(jugador_a);
           // player.setPuntos(jugador_a);
-           // player.setPuntos(jugador_a);
-           player.setPuntos(jugador_a);
            player.setPuntos(jugador_a);
            // player.setPuntos(jugador_a);
            // player.setPuntos(jugador_a);
+            //player.setPuntos(jugador_b);
            // player.setPuntos(jugador_b);
-            player.setPuntos(jugador_b);
-            //player.setPuntos(jugador_b);
-            //player.setPuntos(jugador_b);
             //player.setPuntos(jugador_b);
             player.setPuntos(jugador_b);
             player.setPuntos(jugador_b);
+            player.setPuntos(jugador_b);
+            //player.setPuntos(jugador_b);
             //player.setPuntos(jugador_b);
             player.score();
            // System.out.println(player.getJugadorA());
            // System.out.println(player.getJugadorB());
-            player.ganador();
+           player.ganador();
            // System.out.println(player.getTirosJugador_a());
            // System.out.println(player.getTirosJugador_b());
     }
