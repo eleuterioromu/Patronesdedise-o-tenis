@@ -1,19 +1,17 @@
 import java.util.*;
-
 class Tenis{
-    static ArrayList puntos_jugador_a = new ArrayList();
-    static ArrayList puntos_jugador_b = new ArrayList();
     static Tenis jugador_a = new Tenis();
     static Tenis jugador_b = new Tenis();
     static Tenis player = new Tenis();
-    int tiros_jugador_a;
-    int tiros_jugador_b;
-    String puntos_nombre[] = {"fefteen", "thirty","fourteen}"};
-    int tiros = 0;
-    String cero ="LOVE";
-    String all="ALL";
-    String ventaja ="ADVANTAGE";
-    
+    static String mi_idioma[];
+    static ArrayList puntos_jugador_a = new ArrayList();
+    static ArrayList puntos_jugador_b = new ArrayList();
+    static int tiros_jugador_a;
+    static int tiros_jugador_b;
+    static String puntos_nombre_en[] = {"LOVE","fifteen", "thirteen", "fourteen", "Avantage"};
+    static String puntos_nombre_es[] = {"LOVE","Quince", "Treinta", "Cuarenta", "Ventaja"};
+    static String puntos_nombre_fr[] = {"LOVE","Quinze", "Trente", "Quarante", "Avantage"};
+
     public Tenis(){}
 
     public void setPuntos(Tenis ob){
@@ -31,7 +29,6 @@ class Tenis{
                 puntos_jugador_b.add(10);
             }
         }
-        //score.score();
     }
     
     public int getJugadorA(){
@@ -50,43 +47,59 @@ class Tenis{
         return suma_puntos_b;
     }
     
-    public void ganador(){
-        if(getJugadorA() >= 40 && getJugadorB() < 40){
-            System.out.println("ganador A");
+    public int ganador(){
+        if(getJugadorA() >= 50 && getJugadorB() < 40){
+            return 1;
         }
-        if(getJugadorA() < 40 && getJugadorB() >= 40){
-            System.out.println("ganador B");
+        if(getJugadorB() >= 50  && getJugadorA() < 40){
+            return 2;
+        }
+        if(getJugadorA()-getJugadorB() == 20){
+            return 1;
+        }
+        if(getJugadorB() - getJugadorA() == 20){
+            return 2;
         }
         if(getJugadorA() == 40 && getJugadorB() == 40 || 
             player.getTirosJugador_a() >= 4 && player.getTirosJugador_b() >= 4 && 
             getJugadorA() == getJugadorB()){
-            System.out.println("Deuce");
+            return 3;
         }
-        if(player.getTirosJugador_a() % player.getTirosJugador_b() == 2){
-            System.out.println("ganador A");
+        if(player.getTirosJugador_a() - player.getTirosJugador_b() == 2 && player.getTirosJugador_a() >= 4){
+            return 1;
         }
-        if(player.getTirosJugador_b() % player.getTirosJugador_a() == 2){
-            System.out.println("ganador B");
+        if(player.getTirosJugador_b() - player.getTirosJugador_a() == 2 && player.getTirosJugador_a() >= 4){
+            return 2;
         }
+        return 0;
     }
     
-    public void score(){ 
-        if(player.getJugadorA()==0 && player.getJugadorB() == 0 ){
-         System.out.println("jugador A ( " + cero +" - " + all +" ) jugador B ");
+    public void score(String idiomas[]){
+        mi_idioma = idiomas;
+        if(player.ganador() != 1 && player.getTirosJugador_a() < 4){
+            //System.out.println(puntos_nombre_en[player.getTirosJugador_a()]);
+            System.out.println(mi_idioma[player.getTirosJugador_a()]);
         }
-        else if(player.getJugadorA()==0 && player.getJugadorB()>1){
-         System.out.println("jugador A ( " + cero +" - " + player.getJugadorB() +" ) jugador B ");
+        if(player.ganador() != 2 && player.getTirosJugador_b() < 4){
+            System.out.println(mi_idioma[player.getTirosJugador_b()]);
         }
-        else if(player.getJugadorB()==0 && player.getJugadorA()>1){
-         System.out.println("jugador A ( " + player.getJugadorA() +" - " + all +" ) jugador B ");
+        if(player.getTirosJugador_a()-player.getTirosJugador_b() == 1 && player.getTirosJugador_a() > 3){
+            System.out.println(mi_idioma[4] + " Jugador A");
+            System.out.println(player.getTirosJugador_a());
         }
-          else if(player.getJugadorA()==40 && player.getJugadorB()==40 ){
-         System.out.println("jugador A ( " + puntos_nombre[1] +" - " + puntos_nombre[1] +" ) jugador B "); 
+        if(player.getTirosJugador_b()-player.getTirosJugador_a() == 1 && player.getTirosJugador_b() > 3){
+            System.out.println(mi_idioma[4] + " Jugador B");
+            System.out.println(player.getTirosJugador_a());
         }
-        else if(player.getJugadorA()>=15 && player.getJugadorB()>=15 ){
-         System.out.println("jugador A ( " + player.getJugadorA() +" - " + player.getJugadorB() +" ) jugador B "); 
+        if(player.ganador() == 1){
+            System.out.println("ganador A");
         }
-      
+        if(player.ganador() == 2){
+            System.out.println("ganador B");
+        }
+        if(player.ganador() == 3){
+            System.out.println("Deuce");
+        }
     }
 
     public int getTirosJugador_a(){
@@ -96,27 +109,5 @@ class Tenis{
     public int getTirosJugador_b(){
         return Tenis.puntos_jugador_b.size();
     }    
-    
-    public static void main(String []a){
-          player.setPuntos(jugador_a);
-            player.setPuntos(jugador_a);
-          // player.setPuntos(jugador_a);
-           player.setPuntos(jugador_a);
-           // player.setPuntos(jugador_a);
-           // player.setPuntos(jugador_a);
-            //player.setPuntos(jugador_b);
-           // player.setPuntos(jugador_b);
-            //player.setPuntos(jugador_b);
-            player.setPuntos(jugador_b);
-            player.setPuntos(jugador_b);
-            player.setPuntos(jugador_b);
-            //player.setPuntos(jugador_b);
-            //player.setPuntos(jugador_b);
-            player.score();
-           // System.out.println(player.getJugadorA());
-           // System.out.println(player.getJugadorB());
-           player.ganador();
-           // System.out.println(player.getTirosJugador_a());
-           // System.out.println(player.getTirosJugador_b());
-    }
+       
 }
